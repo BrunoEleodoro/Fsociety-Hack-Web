@@ -1,8 +1,10 @@
 # Fsociety-Hack-Web
 
 Este é o website que está hospedado no firebase<br>
-<a href="https://play.google.com/store/apps/details?id=com.brunoeleodoro.org.fsocietyhack" target="_blank">Link para o aplicativo</a>
 <a href="https://brunofsociety-4204c.firebaseapp.com/" >Website</a>
+<br><br>
+<a href="https://play.google.com/store/apps/details?id=com.brunoeleodoro.org.fsocietyhack" target="_blank">Link para o aplicativo</a>
+<br>
 <br>
 O website é basico, possui um template starter do bootstrap<br>
 e um formulario para preencher com o host e a quantidade de requests<br>
