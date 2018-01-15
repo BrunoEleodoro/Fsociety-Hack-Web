@@ -24,30 +24,42 @@
     <script>
       function send()
       {
-        $.ajax({
-          type: 'POST',
-          url: "https://fcm.googleapis.com/fcm/send",
-          headers: {
-            Authorization: 'key=' + 'AAAA6BISKTs:APA91bHkcNHiaoB5bggCHrE967caAjQYd6rrJxyVeJi80EmO_BWCYqqr4-2gfL443hzZ3PKdfOG7EIXr1Vw8wULxbg976336uX3I2Y_GSD-qQidnCVKaqsACMvXba9odEAHurbS7xfmC'
-          },
-          contentType: 'json',
-          data: JSON.stringify({
-            "to": "/topics/ping_all",
-            "data": {
-              "url": ""+document.getElementById('hostname').value
-            },
-            "notification":{
-              "url": "" + document.getElementById('hostname').value
-            },
-            "priority":"high"
-          }),
-          success: function (response) {
-            console.log(response);
-          },
-          error: function (xhr, status, error) {
-            console.log(xhr.error);
-          }
-        }); 
+	var limite = document.getElementById('limite').value;
+	var hostname = document.getElementById('hostname').value;
+	if((limite <= 40 && limite > 5) && hostname != "")
+	{
+	        $.ajax({
+		  type: 'POST',
+		  url: "https://fcm.googleapis.com/fcm/send",
+		  headers: {
+		    Authorization: 'key=' + 'AAAA6BISKTs:APA91bHkcNHiaoB5bggCHrE967caAjQYd6rrJxyVeJi80EmO_BWCYqqr4-2gfL443hzZ3PKdfOG7EIXr1Vw8wULxbg976336uX3I2Y_GSD-qQidnCVKaqsACMvXba9odEAHurbS7xfmC'
+		  },
+		  contentType: 'application/json',
+		  data: JSON.stringify({
+		    "to": "/topics/ping_all",
+		    "data": {
+		      "url": ""+hostname,
+		      "limite":""+limite
+		    },
+		    "notification":{
+		      "url": ""+hostname,
+		      "limite":""+limite
+		    },
+		    "priority":"high"
+		  }),
+		  success: function (response) {
+		    alert('Sucess');
+		  },
+		  error: function (xhr, status, error) {
+		    console.log(xhr.error);
+		  }
+		}); 
+	}
+	else
+	{
+		alert('Parametros incorretos');
+	}
+
       }
     </script>
 
@@ -80,11 +92,14 @@
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
             <form>
               <div class="form-row">
-                <div class="col-12 col-md-9 mb-2 mb-md-0">
-                  <input type="text" name="hostname" class="form-control form-control-lg" placeholder="http://somenthing.com">
+                <div class="col-12 col-md-8 mb-2 mb-md-0">
+                  <input type="text" id="hostname" class="form-control form-control-lg" placeholder="http://somenthing.com">
                 </div>
-                <div class="col-12 col-md-3">
-                  <button type="submit" class="btn btn-block btn-lg btn-danger" onclick="send();">&#x2620;</button>
+                <div class="col-12 col-md-2 mb-2 mb-md-0">
+                  <input type="number" id="limite" class="form-control form-control-lg" value="5" min="5" max="40">
+		</div>
+                <div class="col-12 col-md-2">
+                  <button type="button" class="btn btn-block btn-lg btn-danger" onclick="send();">&#x2620;</button>
                 </div>
               </div>
             </form>
